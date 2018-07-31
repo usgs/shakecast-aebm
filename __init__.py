@@ -1,4 +1,4 @@
-from main import *
+from aebm import *
 import capacity
 import damage
 import damping

@@ -21,9 +21,7 @@ def run():
     ]
 
     hazard_beta = .5
-
     mag = 6.7
-
     r_rup = 20
 
     capacity = get_capacity('C2', 'high', 1, 24, 2, 1990, 'very_poor', 'poor')
