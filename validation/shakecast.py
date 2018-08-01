@@ -72,7 +72,7 @@ def run():
 
     pp_fig = plt.figure()
     plt.plot([p['disp'] for p in demand],
-        [p['y'] for p in demand], '-ro', label='Median Demand')
+        [p['y'] for p in demand], '-r', label='Median Demand')
     plt.plot([p['disp'] for p in upper_demand],
         [p['y'] for p in upper_demand], label='Upper bound demand')
     plt.plot([p['disp'] for p in lower_demand],
@@ -93,13 +93,23 @@ def run():
     plt.legend()
 
     impact_fig = plt.figure()
-    plt.ylim(0, 1)
-    n, s, m, e, c = plt.bar([1,2,3,4,5], [damage_probs['none'], damage_probs['slight'], damage_probs['moderate'], damage_probs['extensive'], damage_probs['complete']])
+    plt.ylim(0, 100)
+    n, s, m, e, c = plt.bar(
+        [1, 2, 3, 4, 5], 
+        [
+            damage_probs['none'] * 100,
+            damage_probs['slight'] * 100,
+            damage_probs['moderate'] * 100,
+            damage_probs['extensive'] * 100,
+            damage_probs['complete'] * 100
+        ]
+    )
     n.set_facecolor('gray')
     s.set_facecolor('g')
     m.set_facecolor('gold')
     e.set_facecolor('orange')
     c.set_facecolor('r')
+    plt.ylabel('Probability of Exceedance (%)')
     plt.title('Potential Impact')
     plt.xticks([1,2,3,4,5], ['None', 'Slight', 'Moderate', 'Extensive', 'Complete'])
 
