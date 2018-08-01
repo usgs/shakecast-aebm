@@ -456,16 +456,29 @@ def get_elastic_damping(mbt):
     }
 
     return lookup.get(mbt, .07)
-def get_capacity_curve(d_y, a_y, d_u, a_u, n_points=10):
+def get_capacity_curve(d_y, a_y, d_u, a_u, elastic_points=5, elipse_points=15, ultimate_points=30):
     k = (a_u**2 - a_y**2 + a_y**2 * (d_y - d_u) / d_y) / (2 * (a_u - a_y) + (a_y / d_y) * (d_y - d_u))
     b = a_u - k
     a = math.sqrt(d_y / a_y * b**2 * (d_u - d_y) / (a_y - k))
 
-    # pick 10 points between dy and du
-    incr = (d_u - d_y) / n_points
+    # anchor at (0,0)
+    points = [{'x': 0, 'y': 0}]
 
+    # pick points for elestic section
+    slope = a_y / d_y
+    d = 0
+    incr = d_y / elastic_points
+    while d < d_y:
+        points += [{'x': d, 'y': d * slope}]
+        
+        d += incr
+
+    # add elastic period
+    points += [{'x': d_y, 'y': a_y}]
+
+    # pick points between dy and du
+    incr = (d_u - d_y) / elipse_points
     d = d_y + incr
-    points = [{'x': 0, 'y': 0}, {'x': d_y, 'y': a_y}]
     while d < d_u:
         point = {
             'x': d,
@@ -475,7 +488,24 @@ def get_capacity_curve(d_y, a_y, d_u, a_u, n_points=10):
         points += [point]
         d += incr
     
-    points += [{'x': d_u, 'y': a_u}, {'x': d_u * 100, 'y': a_u}]
+    # add ultimate point
+    points += [{'x': d_u, 'y': a_u}]
+
+    # pick points between du and the end of the curve
+    incr = (d_u * 10 - d_u) / (ultimate_points / 2)
+    d = d_u + incr
+    while d < d_u * 10:
+        points += [{'x': d, 'y': a_u}]
+
+        d += incr
+
+    # extend the curve further, but less precisely
+    incr = (d_u * 100 - d) / (ultimate_points / 2)
+    d = d_u + incr
+    while d < d_u * 100:
+        points += [{'x': d, 'y': a_u}]
+
+        d += incr
 
     return points
 

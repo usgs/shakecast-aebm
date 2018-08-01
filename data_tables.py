@@ -1673,7 +1673,7 @@ default_beta = {
             }
         },
         'non-baseline': {
-            'pre-1941': {
+            'post-1975': {
                 1: .8,
                 2: .8,
                 3: .8,

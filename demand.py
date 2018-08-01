@@ -4,13 +4,17 @@ import damping
 import math
 
 def make_demand_spectrum(input):
+    demand = []
     for point in input:
         disp = point['y'] * point['x']**2 * 9.779738
         acc = disp/(9.779738 * (point['x']**2))
-        point['disp'] = disp
-        point['y'] = acc
+        demand += [{
+            'x': point['x'],
+            'y': acc,
+            'disp': disp
+        }]
 
-    return input
+    return demand
 
 def get_demand(hazard, hazard_beta, pref_periods, capacity, mag, rRup):
     output = build_spectrum(hazard, pref_periods, insert=[capacity['elastic_period'], capacity['ultimate_period']], finish_val=0)

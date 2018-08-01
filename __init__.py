@@ -1,4 +1,4 @@
-from main import *
+from aebm import *
 import capacity
 import damage
 import damping
@@ -7,5 +7,5 @@ import demand
 import performance_point
 import spectrum
 import sanaz
-import validate
+import validation
 import test
