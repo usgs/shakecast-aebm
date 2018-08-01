@@ -31,7 +31,7 @@ def run():
     plt.plot([p['x'] for p in capacity['curve']],
         [p['y'] for p in capacity['curve']], 'b', label='Capacity Curve')
     plt.plot([p['disp'] for p in demand_check],
-        [p['y'] for p in demand_check], '-go', label='Demand Validation')
+        [p['y'] for p in demand_check], '-go', label='Demand Verification')
 
 
     intersections = med_intersections + lower_intersections + upper_intersections
@@ -40,18 +40,18 @@ def run():
         [p['y'] for p in intersections], 'yo', label='Intersections')
 
     plt.xlim(xmax=demand[-1]['x'] * 2)
-    plt.title('Performance Point Workbook Validation')
+    plt.title('Performance Point Workbook Verification')
     plt.xlabel('Spectral Displacement (inches)')
     plt.ylabel('Spectral Acceleration (%g)')
     plt.legend()
 
     capacity_fig = plt.figure()
-    plt.title('Capacity Curve Workbook Validation')
+    plt.title('Capacity Curve Workbook Verification')
     plt.xlabel('Spectral Displacement (inches)')
     plt.ylabel('Spectral Acceleration (%g)')
     plt.plot([p['x'] for p in capacity['curve']],
-    [p['y'] for p in capacity['curve']], 'b', label='Computed Capacity Curve')
-    plt.plot(capacity_x, capacity_y, 'r', label='Capacity Curve Validation')
+    [p['y'] for p in capacity['curve']], '-ob', label='Computed Capacity Curve')
+    plt.plot(capacity_x, capacity_y, 'r', label='Capacity Curve Verification')
 
     plt.xlim(0, 10)
     plt.legend()
@@ -61,14 +61,14 @@ def run():
     for dem in demand:
         for c in demand_check:
             if isclose(c['x'], dem['x']):
-                acc_difs += [{'x': dem['x'], 'y': abs(c['y'] - dem['y'])/c['y']}]
+                acc_difs += [{'x': dem['x'], 'y': (c['y'] - dem['y'])/c['y']}]
                 break
 
-    plt.plot([p['x'] for p in acc_difs], [p['y'] * 100 for p in acc_difs], 'o')
+    plt.plot([p['x'] for p in acc_difs], [p['y'] for p in acc_difs], 'o')
     
-    plt.title('Acceleration Difference (vs. workbook)')
+    plt.title('Demand Acceleration Difference (vs. workbook)')
     plt.xlabel('Period (s)')
-    plt.ylabel('% Difference')
+    plt.ylabel('Difference Ratio')
 
     disp_diff_fig = plt.figure()
     disp_difs = []
@@ -76,17 +76,17 @@ def run():
     for dem in demand:
         for c in demand_check:
             if isclose(c['x'], dem['x']):
-                diff = abs(c['disp'] - dem['disp'])
+                diff = (c['disp'] - dem['disp'])
                 ratio = 0 if diff < .001 else diff / c['disp']
 
                 disp_difs += [{'x': dem['x'], 'y': ratio}]
                 break
   
-    plt.plot([p['x'] for p in disp_difs][1:], [p['y'] * 100 for p in disp_difs][1:], 'o')
+    plt.plot([p['x'] for p in disp_difs][1:], [p['y'] for p in disp_difs][1:], 'o')
     
     plt.title('Demand Displacement Difference (vs. workbook)')
     plt.xlabel('Period (s)')
-    plt.ylabel('% Difference')
+    plt.ylabel('Difference Ratio')
 
     return pp_fig, capacity_fig, acc_diff_fig, disp_diff_fig
 

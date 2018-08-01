@@ -20,12 +20,13 @@ def get_b_eff(capacity, kappa):
         if point['y'] > 0:
             t = math.sqrt(point['x'] /
                     (9.779738 * point['y']));
-        
-        if point['x'] >= capacity['elastic_period'] and prev_point is not None:
+
+        if t >= capacity['elastic_period'] and prev_point is not None:
             b_h = 100 * (kappa * ( 2*(point['y'] + prev_point['y']) *
                         (point['x']-(prev_point['x'] + (capacity['yield_point']['x']/capacity['yield_point']['y']) *
                         (point['y']-prev_point['y'])))+(((last_b_h/100)/kappa)) *
                         2 * math.pi * prev_point['x']*prev_point['y'])/(2*math.pi*point['x']*point['y']))
+
             last_b_h = b_h;
           
             b_eff[i] = {'x': t, 'y': max(b_h, capacity['elastic_damping'] * 100)};
@@ -55,13 +56,14 @@ def damp(demand, capacity, mag, r_rup):
     # expand dsf to match demand spectrum periods
     dsf = build_spectrum(dsf, [point['x'] for point in demand])
 
+    damped_demand = [0] * len(demand)
     for i in range(len(demand)):
         damp_disp = demand[i]['disp'] * dsf[i]['y'];
         damp_acc = damp_disp/(9.779738 * demand[i]['x']**2);
 
-        demand[i] = {'disp': damp_disp, 'y': damp_acc, 'x': demand[i]['x']};
+        damped_demand[i] = {'disp': damp_disp, 'y': damp_acc, 'x': demand[i]['x']};
 
-    return demand
+    return damped_demand
 
 def get_kappa(spr, year, mag, r_rup):
     if year > 1975:
@@ -111,4 +113,3 @@ def get_kappa(spr, year, mag, r_rup):
         kappa = interpolate(mag, point1, point2)
 
     return kappa
-

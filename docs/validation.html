@@ -55,31 +55,59 @@
 <dd><ul class="first last simple">
 <li>magnitude: 7.9</li>
 <li>beta: .4</li>
-<li>r_rup: 11.18</li>
+<li>r_rup: 11.18 (km)</li>
 </ul>
 </dd>
 </dl>
-<img alt="Performance point workbork validation image" class="align-center" src="_images/perf_point1.png" />
 <img alt="Capacity workbook validation image" class="align-center" src="_images/capacity_comp.png" />
+<img alt="Hazard expansion image" class="align-center" src="_images/hazard_expansion.png" />
+<img alt="Damping beta verification image" class="align-center" src="_images/damping_beta.png" />
+<img alt="Damping dsf verification image" class="align-center" src="_images/damping_dsf.png" />
+<img alt="Performance point workbork validation image" class="align-center" src="_images/perf_point1.png" />
 <img alt="Spectral acceleration validation image" class="align-center" src="_images/acc_diff.png" />
 <img alt="Displacement validation image" class="align-center" src="_images/disp_diff.png" />
 </div>
 <div class="section" id="shakecast-example">
 <h2>ShakeCast example<a class="headerlink" href="#shakecast-example" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Structure profile:</dt>
+<dd><ul class="first last simple">
+<li>model building type: ‘C2’</li>
+<li>seismic design level: ‘high’</li>
+<li>basis ID: 1</li>
+<li>height (feet): 24</li>
+<li>stories above ground: 2</li>
+<li>year built: 1990</li>
+<li>performance rating: ‘very_poor’</li>
+<li>data quality rating: ‘poor’</li>
+</ul>
+</dd>
+<dt>Hazard:</dt>
+<dd><ul class="first last simple">
+<li>magnitude = 6.7</li>
+<li>beta = .5</li>
+<li>r_rup = 20 (km)</li>
+</ul>
+</dd>
+</dl>
 <p>Using 3 input spectra (0.3s, 1.0s, and 3.0s)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hazard</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># &#39;x&#39;: period (s)</span>
+<span class="c1"># &#39;y&#39;: spectral acceleration (%g)</span>
+<span class="n">hazard</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mo">03</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">1.1377</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">8302</span><span class="p">},</span>
     <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">348</span><span class="p">}</span>
 <span class="p">]</span>
 
 <span class="n">hazard_beta</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
-
 <span class="n">mag</span> <span class="o">=</span> <span class="mf">6.7</span>
-
 <span class="n">r_rup</span> <span class="o">=</span> <span class="mi">20</span>
 </pre></div>
 </div>
+<img alt="ShakeCast example capacity image" class="align-center" src="_images/sc_capacity.png" />
+<img alt="ShakeCast example hazard image" class="align-center" src="_images/sc_hazard.png" />
+<img alt="ShakeCast example dsf image" class="align-center" src="_images/sc_dsf.png" />
+<img alt="ShakeCast example demand image" class="align-center" src="_images/sc_demand.png" />
 <img alt="ShakeCast example performance point image" class="align-center" src="_images/perf_point2.png" />
 <img alt="Impact example image" class="align-center" src="_images/impact_fig.png" />
 </div>

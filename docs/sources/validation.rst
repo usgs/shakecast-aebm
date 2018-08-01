@@ -19,12 +19,24 @@ Hazard:
   - beta: .4
   - r_rup: 11.18 (km)
 
-.. image:: ../figures/perf_point1.png
-   :alt: Performance point workbork validation image
-   :align: center
-
 .. image:: ../figures/capacity_comp.png
    :alt: Capacity workbook validation image
+   :align: center
+
+.. image:: ../figures/hazard_expansion.png
+   :alt: Hazard expansion image
+   :align: center
+
+.. image:: ../figures/damping_beta.png
+   :alt: Damping beta verification image
+   :align: center
+
+.. image:: ../figures/damping_dsf.png
+   :alt: Damping dsf verification image
+   :align: center
+
+.. image:: ../figures/perf_point1.png
+   :alt: Performance point workbork validation image
    :align: center
 
 .. image:: ../figures/acc_diff.png
@@ -70,6 +82,21 @@ Using 3 input spectra (0.3s, 1.0s, and 3.0s)
     mag = 6.7
     r_rup = 20
 
+.. image:: ../figures/sc_capacity.png
+   :alt: ShakeCast example capacity image
+   :align: center
+
+.. image:: ../figures/sc_hazard.png
+   :alt: ShakeCast example hazard image
+   :align: center
+
+.. image:: ../figures/sc_dsf.png
+   :alt: ShakeCast example dsf image
+   :align: center
+
+.. image:: ../figures/sc_demand.png
+   :alt: ShakeCast example demand image
+   :align: center
 
 .. image:: ../figures/perf_point2.png
    :alt: ShakeCast example performance point image

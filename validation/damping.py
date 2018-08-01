@@ -22,15 +22,26 @@ def run():
     beta = build_spectrum(b_eff, sanaz.t);
     dsf = get_dsf(beta, mag, r_rup)
 
-    fig = plt.figure()
-    plt.plot([p['x'] for p in dsf_check], [p['y'] for p in dsf_check], label='Validation Curve')
-    plt.plot([p['x'] for p in dsf], [p['y'] for p in dsf], label='Calculated Curve')
+    fig1 = plt.figure()
+    plt.title('Beta Effective comparison')
+    plt.plot([p['x'] for p in beta_check], [p['y'] for p in beta_check], 'o', label='Verification Curve')
+    plt.plot([p['x'] for p in b_eff], [p['y'] for p in b_eff], 'o', label='Calculated Beta')
+    plt.xlabel('Period (s)')
+    plt.ylabel('Beta Effective')
     plt.legend()
 
-    return fig
+    fig2 = plt.figure()
+    plt.title('DSF Comparison')
+    plt.plot([p['x'] for p in dsf_check], [p['y'] for p in dsf_check], label='Verification Curve')
+    plt.plot([p['x'] for p in dsf], [p['y'] for p in dsf], label='Calculated DSF')
+    plt.xlabel('Period (s)')
+    plt.ylabel('DSF')
+    plt.legend()
+
+    return fig1, fig2
 
 def main():
-    fig = run()
+    fig1, fig2 = run()
     plt.show()
 
 if __name__ == '__main__':
