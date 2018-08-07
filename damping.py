@@ -1,7 +1,7 @@
 import math
-import sanaz
-from spectrum import build_spectrum, interpolate
-from data_tables import degradation_factor
+from . import sanaz
+from .spectrum import build_spectrum, interpolate
+from .data_tables import degradation_factor
 
 def get_b_eff(capacity, kappa):
     last_b_h = 0;

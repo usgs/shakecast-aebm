@@ -1,7 +1,7 @@
-import damping
-from demand import get_demand
-from damage import get_damage_state_beta, get_damage_probabilities
-from performance_point import performance_point
+from . import damping
+from .demand import get_demand
+from .damage import get_damage_state_beta, get_damage_probabilities
+from .performance_point import performance_point
 
 def run(capacity, hazard, hazard_beta, pref_periods, mag, r_rup):
     '''

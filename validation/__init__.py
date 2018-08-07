@@ -1,6 +1,6 @@
-import bundle
-import damping
-import shakecast
-import generate
-import workbook
-import demand
+from . import demand
+from . import bundle
+from . import damping
+from . import generate
+from . import shakecast
+from . import workbook

@@ -12,7 +12,7 @@ from ..damping import get_kappa, get_b_eff, get_dsf
 from ..aebm import run as run_aebm
 from ..data_tables import pref_periods
 from ..sanaz import t as sanaz_t
-from data import *
+from .data import *
 
 def run():
     # run shakecast example

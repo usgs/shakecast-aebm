@@ -1,5 +1,5 @@
-from spectrum import build_spectrum
-import damping
+from .spectrum import build_spectrum
+from . import damping
 
 import math
 

@@ -1,11 +1,11 @@
-from aebm import *
-import capacity
-import damage
-import damping
-import data_tables
-import demand
-import performance_point
-import spectrum
-import sanaz
-import validation
-import test
+from .aebm import *
+from . import capacity
+from . import damage
+from . import damping
+from . import data_tables
+from . import demand
+from . import performance_point
+from . import spectrum
+from . import sanaz
+from . import validation
+from . import test

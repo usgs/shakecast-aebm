@@ -1,10 +1,10 @@
 import os
 import sys
 
-import shakecast
-import workbook
-import damping
-import demand
+from . import shakecast
+from . import workbook
+from . import damping
+from . import demand
 
 if __name__ == '__main__':
     pp_fig, capacity_fig, acc_diff_fig, disp_diff_fig = workbook.run()

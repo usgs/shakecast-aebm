@@ -8,7 +8,7 @@ from ..demand import make_demand_spectrum
 from ..spectrum import build_spectrum
 from ..capacity import get_capacity
 from ..data_tables import pref_periods
-from data import *
+from .data import *
 
 import copy
 
