@@ -8,7 +8,7 @@ from ..demand import get_demand
 from ..spectrum import build_spectrum
 from ..damage import *
 from ..capacity import *
-from ..aebm import run as run_aebm
+from ..core import run as run_aebm
 from ..data_tables import pref_periods
 from .data import *
 

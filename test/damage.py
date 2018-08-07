@@ -1,4 +1,5 @@
 import unittest
+
 from ..damage import *
 from ..capacity import get_modal_height
 from ..capacity import get_modal_response
@@ -266,7 +267,8 @@ class TestDamageStates(unittest.TestCase):
         }
 
         error = ''
-        for name, test in validation.iteritems():
+        for name in validation.keys():
+            test = validation[name]
             test['modal_height'] = get_modal_height(test['mbt'], test['floors_ag'])
             test['modal_response'] = get_modal_response(test['mbt'], test['bid'], test['floors_ag'])
 

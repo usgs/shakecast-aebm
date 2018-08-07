@@ -9,7 +9,7 @@ from ..spectrum import build_spectrum
 from ..damage import *
 from ..capacity import get_capacity
 from ..damping import get_kappa, get_b_eff, get_dsf
-from ..aebm import run as run_aebm
+from ..core import run as run_aebm
 from ..data_tables import pref_periods
 from ..sanaz import t as sanaz_t
 from .data import *
