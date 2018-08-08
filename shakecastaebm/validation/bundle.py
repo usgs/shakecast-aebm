@@ -1,6 +1,7 @@
-import shakecast
-import workbook
-import damping
+from . import shakecast
+from . import workbook
+from . import damping
+from . import demand
 
 def main():
     demand.main()

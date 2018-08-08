@@ -5,6 +5,8 @@
 /dist-server
 /tmp
 /out-tsc
+build
+*.egg-info
 
 # dependencies
 /node_modules

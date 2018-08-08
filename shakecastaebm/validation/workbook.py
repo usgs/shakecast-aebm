@@ -3,14 +3,14 @@ matplotlib.use('TkAgg')
 
 import matplotlib.pyplot as plt
 
-from ..performance_point import performance_point
-from ..demand import get_demand
-from ..spectrum import build_spectrum
-from ..damage import *
-from ..capacity import *
-from ..aebm import run as run_aebm
-from ..data_tables import pref_periods
-from data import *
+from shakecastaebm.performance_point import performance_point
+from shakecastaebm.demand import get_demand
+from shakecastaebm.spectrum import build_spectrum
+from shakecastaebm.damage import *
+from shakecastaebm.capacity import *
+from shakecastaebm.core import run as run_aebm
+from shakecastaebm.data_tables import pref_periods
+from .data import *
 
 
 def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):

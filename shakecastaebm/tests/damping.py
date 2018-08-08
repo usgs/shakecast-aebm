@@ -1,6 +1,6 @@
 import unittest
 
-from ..damping import *
+from shakecastaebm.damping import *
 
 class TestKappa(unittest.TestCase):
     def test_validate(self):

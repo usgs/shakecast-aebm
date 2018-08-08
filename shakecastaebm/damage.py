@@ -1,4 +1,4 @@
-from data_tables import interstory_drift, default_beta
+from .data_tables import interstory_drift, default_beta
 import math
 
 def get_drift(mbt, sdl, perf, state):

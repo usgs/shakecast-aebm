@@ -1,5 +1,5 @@
-from damage import get_damage_state_medians, get_default_damage_state_beta
-from data_tables import modal_height, modal_weight, modal_shape_factor
+from .damage import get_damage_state_medians, get_default_damage_state_beta
+from .data_tables import modal_height, modal_weight, modal_shape_factor
 
 import math
 
