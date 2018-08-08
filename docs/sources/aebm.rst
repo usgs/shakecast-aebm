@@ -3,31 +3,31 @@ aebm
 
 Module contents
 
-.. automodule:: aebm
+.. automodule:: shakecastaebm
     :members:
     :undoc-members:
     :show-inheritance:
-.. automodule:: capacity
+.. automodule:: shakecastaebm.capacity
     :members:
     :undoc-members:
     :show-inheritance:
-.. automodule:: demand
+.. automodule:: shakecastaebm.demand
     :members:
     :undoc-members:
     :show-inheritance:
-.. automodule:: damage
+.. automodule:: shakecastaebm.damage
     :members:
     :undoc-members:
     :show-inheritance:
-.. automodule:: damping
+.. automodule:: shakecastaebm.damping
     :members:
     :undoc-members:
     :show-inheritance:
-.. automodule:: performance_point
+.. automodule:: shakecastaebm.performance_point
     :members:
     :undoc-members:
     :show-inheritance:
-.. automodule:: spectrum
+.. automodule:: shakecastaebm.spectrum
     :members:
     :undoc-members:
     :show-inheritance:
