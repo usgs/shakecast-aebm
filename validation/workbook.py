@@ -3,13 +3,13 @@ matplotlib.use('TkAgg')
 
 import matplotlib.pyplot as plt
 
-from ..performance_point import performance_point
-from ..demand import get_demand
-from ..spectrum import build_spectrum
-from ..damage import *
-from ..capacity import *
-from ..core import run as run_aebm
-from ..data_tables import pref_periods
+from aebm.performance_point import performance_point
+from aebm.demand import get_demand
+from aebm.spectrum import build_spectrum
+from aebm.damage import *
+from aebm.capacity import *
+from aebm.core import run as run_aebm
+from aebm.data_tables import pref_periods
 from .data import *
 
 

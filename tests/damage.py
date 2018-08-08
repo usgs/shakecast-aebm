@@ -1,8 +1,8 @@
 import unittest
 
-from ..damage import *
-from ..capacity import get_modal_height
-from ..capacity import get_modal_response
+from aebm.damage import *
+from aebm.capacity import get_modal_height
+from aebm.capacity import get_modal_response
 
 class TestDamageStates(unittest.TestCase):
     def test_workbookValidation(self):

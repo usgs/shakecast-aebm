@@ -3,11 +3,11 @@ matplotlib.use('TkAgg')
 
 import matplotlib.pyplot as plt
 
-from ..damping import *
-from ..demand import make_demand_spectrum
-from ..spectrum import build_spectrum
-from ..capacity import get_capacity
-from ..data_tables import pref_periods
+from aebm.damping import *
+from aebm.demand import make_demand_spectrum
+from aebm.spectrum import build_spectrum
+from aebm.capacity import get_capacity
+from aebm.data_tables import pref_periods
 from .data import *
 
 def run():
