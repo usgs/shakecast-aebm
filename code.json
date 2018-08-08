@@ -1,14 +1,14 @@
 {
-  "name": "shakecast",
+  "name": "shakecast-aebm",
   "organization": "U.S. Geological Survey",
-  "description": "Application for rapid ShakeMap distribution",
+  "description": "Calculates potential impacts to well defined facities given some earthquake shaking hazard",
   "status": "Beta",
-  "homepage": "https://github.com/usgs/shakecast",
-  "downloadURL": "https://github.com/usgs/shakecast/archive/master.zip",
+  "homepage": "https://github.com/usgs/shakecast-aebm",
+  "downloadURL": "https://github.com/usgs/shakecast-aebm/archive/master.zip",
   "openSourceProject": 1,
-  "license": "https://github.com/usgs/shakecast/blob/master/LICENSE",
+  "license": "https://github.com/usgs/shakecast-aebm/blob/master/LICENSE",
   "vcs": "git",
-  "repository": "https://github.com/usgs/shakecast.git",
+  "repository": "https://github.com/usgs/shakecast-aebm.git",
 
   "tags": [
     "earthquake",
@@ -16,15 +16,11 @@
     "losses",
     "shakemap",
     "notifications",
-    "shaking"
+    "shaking",
+    "shakecast"
   ],
   "languages": [
-    "python",
-    "typescript",
-    "html",
-    "css",
-    "shell",
-    "batch"
+    "python"
   ],
 
   "contact": {
@@ -32,6 +28,6 @@
     "email": "dslosky@usgs.gov"
   },
   "updated": {
-    "metadataLastUpdated": "2017-12-06"
+    "metadataLastUpdated": "2018-08-08"
   }
 }

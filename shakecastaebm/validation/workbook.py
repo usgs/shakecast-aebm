@@ -3,13 +3,13 @@ matplotlib.use('TkAgg')
 
 import matplotlib.pyplot as plt
 
-from aebm.performance_point import performance_point
-from aebm.demand import get_demand
-from aebm.spectrum import build_spectrum
-from aebm.damage import *
-from aebm.capacity import *
-from aebm.core import run as run_aebm
-from aebm.data_tables import pref_periods
+from shakecastaebm.performance_point import performance_point
+from shakecastaebm.demand import get_demand
+from shakecastaebm.spectrum import build_spectrum
+from shakecastaebm.damage import *
+from shakecastaebm.capacity import *
+from shakecastaebm.core import run as run_aebm
+from shakecastaebm.data_tables import pref_periods
 from .data import *
 
 
