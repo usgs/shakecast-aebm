@@ -48,9 +48,9 @@ def get_dsf(beta, mag, rRup):
 
 def damp(demand, capacity, mag, r_rup):
     kappa = get_kappa(capacity['performance_rating'], capacity['year'], mag, r_rup)
-    b_eff = get_b_eff(capacity, kappa)
+    b_eff_spectrum = get_b_eff(capacity, kappa)
 
-    beta = build_spectrum(b_eff, sanaz.t);
+    beta = build_spectrum(b_eff_spectrum, sanaz.t);
     dsf = get_dsf(beta, mag, r_rup)
 
     # expand dsf to match demand spectrum periods
