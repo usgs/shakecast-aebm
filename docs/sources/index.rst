@@ -9,6 +9,7 @@ This is a Python implementation of the HAZUS Advanced Engineering Building Modul
    :maxdepth: 2
    :caption: Contents:
 
+   installation
    methods
    apidocs
 

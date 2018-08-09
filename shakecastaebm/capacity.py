@@ -531,7 +531,33 @@ def get_capacity(mbt, sdl, bid, height, stories, year, performance_rating='basel
         elastic_damping=None, design_period=None, ultimate_period=None, design_coefficient=None, modal_weight=None,
         modal_height=None, modal_response=None, pre_yield=None, post_yield=None,
         max_strength=None, ductility=None, default_damage_state_beta=None
-
+    
+    Returns:
+        dict: `
+        {
+          'curve': capacity_curve,
+          'damage_state_medians': damage_state_medians,
+          'default_damage_state_beta': default_damage_state_beta,
+          'design_coefficient': design_coefficient,
+          'design_period': design_period,
+          'ductility': ductility,
+          'elastic_damping': elastic_damping,
+          'elastic_period': elastic_period,
+          'max_strength': max_strength,
+          'modal_height': modal_height,
+          'modal_response': modal_response,
+          'modal_weight': modal_weight,
+          'performance_rating': performance_rating,
+          'post_yield': post_yield,
+          'pre_yield': pre_yield,
+          'quality_rating': quality_rating,
+          'stories': stories,
+          'ultimate_period': ultimate_period,
+          'ultimate_point': ultimate_point,
+          'year': year,
+          'yield_point': yield_point
+    }
+    `
     '''
 
     elastic_period = elastic_period if elastic_period else get_default_period(mbt, sdl, height)
