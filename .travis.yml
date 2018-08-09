@@ -5,10 +5,14 @@ python:
 
 install: 
   - pip install -r requirements.txt
+  - pip install codecov
 
 script:
-  - python tests.bundle
+  - coverage run tests.bundle
 
 branches:
   only:
     - master
+
+after_success:
+  - codecov
