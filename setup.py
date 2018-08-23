@@ -19,7 +19,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 with open(path.join(here, 'requirements.txt'), 'r') as f:
     req_list = f.read().splitlines()
 
-with open(path.join(here, 'extras-require.txt'), 'r') as f:
+with open(path.join(here, 'dev-requirements.txt'), 'r') as f:
     dev_list = f.read().splitlines()
     extras_require = {'dev': dev_list}
 

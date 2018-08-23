@@ -9,6 +9,7 @@ install:
 
 script:
   - coverage run -m shakecastaebm.tests.bundle
+  - python setup.py sdist bdist_wheel
 
 branches:
   only:
@@ -16,3 +17,11 @@ branches:
 
 after_success:
   - codecov
+
+deploy:
+  provider: pypi
+  user: "dslosky"
+  password: pypiPass
+  distributions: "sdist bdist_wheel"
+  on:
+    tags: true
