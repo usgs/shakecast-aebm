@@ -19,13 +19,17 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 with open(path.join(here, 'requirements.txt'), 'r') as f:
     req_list = f.read().splitlines()
 
+with open(path.join(here, 'extras-require.txt'), 'r') as f:
+    dev_list = f.read().splitlines()
+    extras_require = {'dev': dev_list}
+
 setup(
     name='shakecast-aebm',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.0a1',
+    version='0.0a2',
 
     description='Potential impact calculation for well defined facilities due to an input earthquake hazard',
     long_description=long_description,
@@ -83,7 +87,7 @@ setup(
     # dependencies). You can install these using the following syntax,
     # for example:
     # $ pip install -e .[dev,test]
-    extras_require={},
+    extras_require=extras_require,
 
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
