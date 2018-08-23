@@ -7,5 +7,3 @@ from . import demand
 from . import performance_point
 from . import spectrum
 from . import sanaz
-from . import validation
-from . import tests
