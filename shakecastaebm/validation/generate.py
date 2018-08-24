@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
+
 import os
 import sys
 
@@ -6,7 +9,7 @@ from . import workbook
 from . import damping
 from . import demand
 
-if __name__ == '__main__':
+def main():
     pp_fig, capacity_fig, acc_diff_fig, disp_diff_fig = workbook.run()
     cap_fig, haz_fig, dsf_fig, dem_fig, sc_pp_fig, impact_fig = shakecast.run()
     damp1, damp2 = damping.run()
@@ -41,3 +44,6 @@ if __name__ == '__main__':
     # save demand figures
     demand1.savefig(os.path.join(path, 'hazard_expansion'))
     demand2.savefig(os.path.join(path, 'damped_demand'))
+
+if __name__ == '__main__':
+    main()
