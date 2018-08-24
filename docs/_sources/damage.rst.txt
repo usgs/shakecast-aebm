@@ -1,0 +1,9 @@
+damage
+========
+
+Module contents
+
+.. automodule:: damage
+    :members:
+    :undoc-members:
+    :show-inheritance:

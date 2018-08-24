@@ -1,0 +1,41 @@
+stages:
+  - name: after_success
+    if: branch = master
+
+language: python
+python:
+  - "2.7"
+  - "3.6"
+
+install: 
+  - pip install -r requirements.txt
+  - pip install codecov
+
+script:
+  - coverage run -m shakecastaebm.tests.bundle
+  - python setup.py sdist bdist_wheel
+
+after_success:
+  - codecov
+
+before_deploy:
+  - pip install -r dev-requirements.txt
+  - python makedocs.py
+
+deploy:
+  provider: pypi
+  user: "dslosky"
+  password: $PYPI_PASSWORD
+  distributions: "sdist bdist_wheel"
+  on:
+    tags: true
+    python: 3.6
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  target-branch: auto-docs
+  on:
+    tags: true
+    python: 3.6

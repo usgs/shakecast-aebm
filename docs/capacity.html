@@ -1,0 +1,226 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>capacity &#8212; aebm 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="demand" href="demand.html" />
+    <link rel="prev" title="aebm" href="aebm.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="capacity">
+<h1>capacity<a class="headerlink" href="#capacity" title="Permalink to this headline">¶</a></h1>
+<p>Module contents</p>
+<span class="target" id="module-capacity"></span><dl class="function">
+<dt id="capacity.get_capacity">
+<code class="descclassname">capacity.</code><code class="descname">get_capacity</code><span class="sig-paren">(</span><em>mbt</em>, <em>sdl</em>, <em>bid</em>, <em>height</em>, <em>stories</em>, <em>year</em>, <em>performance_rating='baseline'</em>, <em>quality_rating='poor'</em>, <em>elastic_period=None</em>, <em>elastic_damping=None</em>, <em>design_period=None</em>, <em>ultimate_period=None</em>, <em>design_coefficient=None</em>, <em>modal_weight=None</em>, <em>modal_height=None</em>, <em>modal_response=None</em>, <em>pre_yield=None</em>, <em>post_yield=None</em>, <em>max_strength=None</em>, <em>ductility=None</em>, <em>default_damage_state_beta=None</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a dictionary that contains a capacity curve as well as the
+various parameters used to generate it and potential damage states
+when shaking occurs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mbt</strong> – HAZUS model building type</li>
+<li><strong>sdl</strong> – seasmic design level (special, high, moderate, low)</li>
+<li><strong>bid</strong> – basis ID, 1-7, describes structural deficiencies from FEMA 155</li>
+<li><strong>height</strong> – height of the structure in feet</li>
+<li><strong>stories</strong> – count of stories above ground.</li>
+<li><strong>year</strong> – year the building was constructured or retrofit</li>
+<li><strong>performance_rating</strong> – DEFAULT ‘baseline’, structural performance rating (baseline, poor, or very_poor)</li>
+<li><strong>quality_rating</strong> – DEFAULT ‘poor’, The quality of this structural data (high, moderate, poor, very_poor) elastic_period=None,</li>
+<li><strong>design_period=None</strong><strong>, </strong><strong>ultimate_period=None</strong><strong>, </strong><strong>design_coefficient=None</strong><strong>, </strong><strong>modal_weight=None</strong><strong>,</strong> (<em>elastic_damping=None</em><em>,</em>) – </li>
+<li><strong>modal_response=None</strong><strong>, </strong><strong>pre_yield=None</strong><strong>, </strong><strong>post_yield=None</strong><strong>,</strong> (<em>modal_height=None</em><em>,</em>) – </li>
+<li><strong>ductility=None</strong><strong>, </strong><strong>default_damage_state_beta=None</strong> (<em>max_strength=None</em><em>,</em>) – </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_capacity_curve">
+<code class="descclassname">capacity.</code><code class="descname">get_capacity_curve</code><span class="sig-paren">(</span><em>d_y</em>, <em>a_y</em>, <em>d_u</em>, <em>a_u</em>, <em>n_points=10</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_capacity_curve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_default_period">
+<code class="descclassname">capacity.</code><code class="descname">get_default_period</code><span class="sig-paren">(</span><em>mbt</em>, <em>sdl</em>, <em>height</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_default_period" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_design_coefficient">
+<code class="descclassname">capacity.</code><code class="descname">get_design_coefficient</code><span class="sig-paren">(</span><em>design_period</em>, <em>mbt</em>, <em>sdl</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_design_coefficient" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_design_period">
+<code class="descclassname">capacity.</code><code class="descname">get_design_period</code><span class="sig-paren">(</span><em>mbt</em>, <em>sdl</em>, <em>height</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_design_period" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_ductility">
+<code class="descclassname">capacity.</code><code class="descname">get_ductility</code><span class="sig-paren">(</span><em>stories</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_ductility" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_elastic_damping">
+<code class="descclassname">capacity.</code><code class="descname">get_elastic_damping</code><span class="sig-paren">(</span><em>mbt</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_elastic_damping" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_max_strength">
+<code class="descclassname">capacity.</code><code class="descname">get_max_strength</code><span class="sig-paren">(</span><em>pre_yield</em>, <em>post_yield</em>, <em>modal_weight</em>, <em>design_coefficient</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_max_strength" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_modal_height">
+<code class="descclassname">capacity.</code><code class="descname">get_modal_height</code><span class="sig-paren">(</span><em>mbt</em>, <em>stories</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_modal_height" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_modal_response">
+<code class="descclassname">capacity.</code><code class="descname">get_modal_response</code><span class="sig-paren">(</span><em>mbt</em>, <em>bid</em>, <em>stories</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_modal_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_modal_weight">
+<code class="descclassname">capacity.</code><code class="descname">get_modal_weight</code><span class="sig-paren">(</span><em>mbt</em>, <em>stories</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_modal_weight" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_post_yield">
+<code class="descclassname">capacity.</code><code class="descname">get_post_yield</code><span class="sig-paren">(</span><em>mbt</em>, <em>bid</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_post_yield" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_pre_yield">
+<code class="descclassname">capacity.</code><code class="descname">get_pre_yield</code><span class="sig-paren">(</span><em>stories</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_pre_yield" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_seismic_design">
+<code class="descclassname">capacity.</code><code class="descname">get_seismic_design</code><span class="sig-paren">(</span><em>design_period</em>, <em>mbt</em>, <em>sdl</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_seismic_design" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_ultimate_period">
+<code class="descclassname">capacity.</code><code class="descname">get_ultimate_period</code><span class="sig-paren">(</span><em>d</em>, <em>a</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_ultimate_period" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_ultimate_point">
+<code class="descclassname">capacity.</code><code class="descname">get_ultimate_point</code><span class="sig-paren">(</span><em>ductility</em>, <em>d_y</em>, <em>a_y</em>, <em>post_yield</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_ultimate_point" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="capacity.get_yield_point">
+<code class="descclassname">capacity.</code><code class="descname">get_yield_point</code><span class="sig-paren">(</span><em>design_coefficient</em>, <em>elastic_period</em>, <em>modal_weight</em>, <em>pre_yield</em><span class="sig-paren">)</span><a class="headerlink" href="#capacity.get_yield_point" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">aebm</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="apidocs.html">API Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="aebm.html">aebm</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">capacity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demand.html">demand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="damage.html">damage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="damping.html">damping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance_point.html">performance_point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spectrum.html">spectrum</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="apidocs.html">API Documentation</a><ul>
+      <li>Previous: <a href="aebm.html" title="previous chapter">aebm</a></li>
+      <li>Next: <a href="demand.html" title="next chapter">demand</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Daniel Slosky.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/capacity.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

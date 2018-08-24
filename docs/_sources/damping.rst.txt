@@ -1,0 +1,9 @@
+damping
+=========
+
+Module contents
+
+.. automodule:: damping
+    :members:
+    :undoc-members:
+    :show-inheritance:
