@@ -1,6 +1,3 @@
-import matplotlib
-matplotlib.use('TkAgg')
-
 import matplotlib.pyplot as plt
 
 from shakecastaebm.performance_point import performance_point

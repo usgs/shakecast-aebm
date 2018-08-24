@@ -1,6 +1,3 @@
-import matplotlib
-matplotlib.use('TkAgg')
-
 import matplotlib.pyplot as plt
 
 from shakecastaebm.damping import *
@@ -19,7 +16,7 @@ def run():
     kappa = get_kappa(capacity['performance_rating'], capacity['year'], mag, r_rup)
     b_eff = get_b_eff(capacity, kappa)
 
-    beta = build_spectrum(b_eff, sanaz.t);
+    beta = build_spectrum(b_eff, sanaz.t)
     dsf = get_dsf(beta, mag, r_rup)
 
     fig1 = plt.figure()
