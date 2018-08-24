@@ -36,6 +36,7 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   target-branch: auto-docs
+  keep-history: true
   on:
     tags: true
     python: 3.6
