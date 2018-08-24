@@ -21,7 +21,7 @@ after_success:
 deploy:
   provider: pypi
   user: "dslosky"
-  password: pypiPass
+  password: $PYPI_PASSWORD
   distributions: "sdist bdist_wheel"
   on:
     tags: true
