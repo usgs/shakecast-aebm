@@ -1,9 +1,0 @@
-demand
-========
-
-Module contents
-
-.. automodule:: demand
-    :members:
-    :undoc-members:
-    :show-inheritance:

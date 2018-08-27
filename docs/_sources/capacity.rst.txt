@@ -1,9 +1,0 @@
-capacity
-============
-
-Module contents
-
-.. automodule:: capacity
-    :members:
-    :undoc-members:
-    :show-inheritance:
