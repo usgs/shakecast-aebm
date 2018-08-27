@@ -8,6 +8,11 @@
 build
 *.egg-info
 
+# sphinx documentation
+/docs/*
+!/docs/sources
+!/docs/Makefile
+
 # dependencies
 /node_modules
 
