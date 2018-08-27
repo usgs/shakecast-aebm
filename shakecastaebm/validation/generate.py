@@ -1,6 +1,3 @@
-import matplotlib
-matplotlib.use('Agg', force=True)
-
 import os
 import sys
 
@@ -9,16 +6,11 @@ from . import workbook
 from . import damping
 from . import demand
 
-def main():
+def main(path='.'):
     pp_fig, capacity_fig, acc_diff_fig, disp_diff_fig = workbook.run()
     cap_fig, haz_fig, dsf_fig, dem_fig, sc_pp_fig, impact_fig = shakecast.run()
     damp1, damp2 = damping.run()
     demand1, demand2 = demand.run()
-
-    if len(sys.argv) > 1:
-        path = sys.argv[1]
-    else:
-        path = '.'
 
     if not os.path.exists(path):
         os.makedirs(path)
@@ -46,4 +38,8 @@ def main():
     demand2.savefig(os.path.join(path, 'damped_demand'))
 
 if __name__ == '__main__':
-    main()
+    path = '.'
+    if len(sys.argv) > 1:
+        path = sys.argv[1]
+
+    main(path)
