@@ -15,7 +15,15 @@ def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
 
 def run():
     capacity = get_capacity('PC1', 'high', 7, 24, 2, 1990, 'very_poor', 'poor')
-    damage_probs, capacity, demand, lower_demand, upper_demand, med_intersections, lower_intersections, upper_intersections = run_aebm(capacity, hazard, hazard_beta, pref_periods, mag, r_rup)
+    (damage_probs,
+    capacity,
+    demand,
+    lower_demand,
+    upper_demand,
+    med_intersections,
+    lower_intersections,
+    upper_intersections) = run_aebm(capacity,
+            hazard, hazard_beta, mag, r_rup)
 
     pp_fig = plt.figure()
     plt.xlim(xmin=0)

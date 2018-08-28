@@ -33,7 +33,15 @@ def run():
     beta = build_spectrum(b_eff, sanaz_t)
     dsf = get_dsf(beta, mag, r_rup)
 
-    damage_probs, capacity, demand, lower_demand, upper_demand, med_intersections, lower_intersections, upper_intersections = run_aebm(capacity, hazard, hazard_beta, pref_periods, mag, r_rup)
+    (damage_probs,
+    capacity,
+    demand,
+    lower_demand,
+    upper_demand,
+    med_intersections,
+    lower_intersections,
+    upper_intersections) = run_aebm(capacity,
+            hazard, hazard_beta, mag, r_rup)
 
     cap_fig = plt.figure()
     plt.plot([p['x'] for p in capacity['curve']],
