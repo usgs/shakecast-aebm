@@ -12,7 +12,6 @@ def get_damage_state_medians(mbt, sdl, performance_rating, height, modal_height,
       'complete': 0
     }
 
-    damage_state_medians = {}
     for state in states.keys():
         drift = get_drift(
             mbt,
@@ -119,11 +118,46 @@ def get_damage_state_beta(default_beta, default_median, lower_bound_demand_disp,
 
     return min(1.1 * default_beta, max(.9 * default_beta, math.sqrt(min(max(math.log(min(upper_bound_demand_disp, 1.2 * default_median) / min(lower_bound_demand_disp, 1.2 * default_median))/2, demand_uncertainty / 2), demand_uncertainty * 2)**2) + min(max(math.log(min(upper_bound_demand_acc, 1.2 * default_median) / min(lower_bound_demand_acc, 1.2 * default_median))/2, beta_c / 2), 2 * beta_c)**2 + beta_t**2))
 
-def get_damage_probabilities(damage_state_medians, damage_state_beta, displacement):
-    complete = lognorm(damage_state_medians['complete'], damage_state_beta, displacement)
-    extensive = lognorm(damage_state_medians['extensive'], damage_state_beta, displacement) - complete
-    moderate = lognorm(damage_state_medians['moderate'], damage_state_beta, displacement) - complete - extensive
-    slight = lognorm(damage_state_medians['slight'], damage_state_beta, displacement) - complete - extensive - moderate
+def get_damage_probabilities(
+    damage_state_medians,
+    damage_state_beta,
+    displacement
+):
+    '''
+    Computes damage probabilities based on input damage state medians
+    and displacement
+
+    Args:
+        damage_state_medians: dict ex.
+            ```{
+                'slight': float,
+                'moderate': float,
+                'extensive': float,
+                'complete': float
+            }```
+        damage_state_beta: float uncertainty in damage states
+        displacement: float
+    '''
+    complete = lognorm(
+        damage_state_medians['complete'],
+        damage_state_beta,
+        displacement
+    )
+    extensive = lognorm(
+                damage_state_medians['extensive'],
+                damage_state_beta,
+                displacement
+            ) - complete
+    moderate = lognorm(
+                damage_state_medians['moderate'],
+                damage_state_beta,
+                displacement
+            ) - complete - extensive
+    slight = lognorm(
+                damage_state_medians['slight'],
+                damage_state_beta,
+                displacement
+            ) - complete - extensive - moderate
     none = 1 - complete - extensive - moderate - slight
 
     return {
