@@ -2,8 +2,10 @@ from . import damping
 from .demand import get_demand
 from .damage import get_damage_state_beta, get_damage_probabilities
 from .performance_point import performance_point
+from .data_tables import pref_periods
 
-def run(capacity, hazard, hazard_beta, pref_periods, mag, r_rup):
+def run(capacity, hazard, hazard_beta,
+        mag, r_rup, pref_periods=pref_periods):
     '''
     Compares an input capacity curve to a hazard in order to determine
     the probability of a structure being in a specific damage state

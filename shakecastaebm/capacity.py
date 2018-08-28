@@ -146,8 +146,6 @@ def get_modal_response(mbt, bid, stories):
 
     return shape
 
-
-
 def get_modal_height(mbt, stories):
     return modal_height[stories].get(
         mbt,
@@ -456,6 +454,7 @@ def get_elastic_damping(mbt):
     }
 
     return lookup.get(mbt, .07)
+
 def get_capacity_curve(d_y, a_y, d_u, a_u, elastic_points=5, elipse_points=15, ultimate_points=30):
     k = (a_u**2 - a_y**2 + a_y**2 * (d_y - d_u) / d_y) / (2 * (a_u - a_y) + (a_y / d_y) * (d_y - d_u))
     b = a_u - k
@@ -512,7 +511,7 @@ def get_capacity_curve(d_y, a_y, d_u, a_u, elastic_points=5, elipse_points=15, u
 def get_capacity(mbt, sdl, bid, height, stories, year, performance_rating='baseline', quality_rating='poor', elastic_period=None, 
         elastic_damping=None, design_period=None, ultimate_period=None, design_coefficient=None, modal_weight=None,
         modal_height=None, modal_response=None, pre_yield=None, post_yield=None,
-        max_strength=None, ductility=None, default_damage_state_beta=None):
+        max_strength=None, ductility=None, default_damage_state_beta=None, **kwargs):
 
     '''
     Builds a dictionary that contains a capacity curve as well as the
@@ -605,8 +604,3 @@ def get_capacity(mbt, sdl, bid, height, stories, year, performance_rating='basel
           'year': year,
           'yield_point': yield_point
     }
-
-
-if __name__ == '__main__':
-    # tests....
-    get_capacity('W1', 'high', 1, 'baseline', 'best', 24, 2, 1975)
