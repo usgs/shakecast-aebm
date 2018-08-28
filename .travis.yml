@@ -33,7 +33,6 @@ deploy:
   - provider: pypi
     user: "dslosky"
     password: $PYPI_PASSWORD
-    distributions: "sdist bdist_wheel"
+    distributions: "bdist_wheel"
     on:
       tags: true
-      python: 3.6
