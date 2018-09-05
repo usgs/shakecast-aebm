@@ -422,13 +422,13 @@ def get_yield_point(design_coefficient, elastic_period, modal_weight, pre_yield)
   a_y = design_coefficient * pre_yield / modal_weight
   d_y = 386.08858 / (4 * math.pi**2) * a_y * elastic_period**2
 
-  return {'x': d_y, 'y': a_y}
+  return {'disp': d_y, 'acc': a_y}
 
 def get_ultimate_point(ductility, d_y, a_y, post_yield):
   a_u = a_y * post_yield
   d_u = ductility * d_y * post_yield
 
-  return {'x': d_u, 'y': a_u}
+  return {'disp': d_u, 'acc': a_u}
 
 def get_ultimate_period(d, a):
     return math.sqrt(d / (a * 9.779738))
@@ -461,40 +461,40 @@ def get_capacity_curve(d_y, a_y, d_u, a_u, elastic_points=5, elipse_points=15, u
     a = math.sqrt(d_y / a_y * b**2 * (d_u - d_y) / (a_y - k))
 
     # anchor at (0,0)
-    points = [{'x': 0, 'y': 0}]
+    points = [{'disp': 0, 'acc': 0}]
 
     # pick points for elestic section
     slope = a_y / d_y
     d = 0
     incr = d_y / elastic_points
     while d < d_y:
-        points += [{'x': d, 'y': d * slope}]
+        points += [{'disp': d, 'acc': d * slope}]
         
         d += incr
 
     # add elastic period
-    points += [{'x': d_y, 'y': a_y}]
+    points += [{'disp': d_y, 'acc': a_y}]
 
     # pick points between dy and du
     incr = (d_u - d_y) / elipse_points
     d = d_y + incr
     while d < d_u:
         point = {
-            'x': d,
-            'y': b * math.sqrt((1 - (d - d_u)**2 / a**2)) + k
+            'disp': d,
+            'acc': b * math.sqrt((1 - (d - d_u)**2 / a**2)) + k
         }
 
         points += [point]
         d += incr
     
     # add ultimate point
-    points += [{'x': d_u, 'y': a_u}]
+    points += [{'disp': d_u, 'acc': a_u}]
 
     # pick points between du and the end of the curve
     incr = (d_u * 10 - d_u) / (ultimate_points / 2)
     d = d_u + incr
     while d < d_u * 10:
-        points += [{'x': d, 'y': a_u}]
+        points += [{'disp': d, 'disp': d, 'acc': a_u}]
 
         d += incr
 
@@ -502,7 +502,7 @@ def get_capacity_curve(d_y, a_y, d_u, a_u, elastic_points=5, elipse_points=15, u
     incr = (d_u * 100 - d) / (ultimate_points / 2)
     d = d_u + incr
     while d < d_u * 100:
-        points += [{'x': d, 'y': a_u}]
+        points += [{'disp': d, 'acc': a_u}]
 
         d += incr
 
@@ -576,10 +576,10 @@ def get_capacity(mbt, sdl, bid, height, stories, year, performance_rating='basel
     )
 
     yield_point = get_yield_point(design_coefficient, elastic_period, modal_weight, pre_yield)
-    ultimate_point = get_ultimate_point(ductility, yield_point['x'], yield_point['y'], post_yield)
-    ultimate_period = ultimate_period if ultimate_period else get_ultimate_period(ultimate_point['x'], ultimate_point['y'])
+    ultimate_point = get_ultimate_point(ductility, yield_point['disp'], yield_point['acc'], post_yield)
+    ultimate_period = ultimate_period if ultimate_period else get_ultimate_period(ultimate_point['disp'], ultimate_point['acc'])
     damage_state_medians = get_damage_state_medians(mbt, sdl, performance_rating, height, modal_height, modal_response)
-    capacity_curve = get_capacity_curve(yield_point['x'], yield_point['y'], ultimate_point['x'], ultimate_point['y'])
+    capacity_curve = get_capacity_curve(yield_point['disp'], yield_point['acc'], ultimate_point['disp'], ultimate_point['acc'])
 
     return {
           'curve': capacity_curve,

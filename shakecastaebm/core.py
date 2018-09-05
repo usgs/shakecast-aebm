@@ -54,8 +54,24 @@ def run(capacity, hazard, hazard_beta,
     lower_intersections = performance_point(capacity['curve'], lower_demand)
     upper_intersections = performance_point(capacity['curve'], upper_demand)
 
-    capacity['calcucated_beta'] = get_damage_state_beta(capacity['default_damage_state_beta'], capacity['damage_state_medians']['complete'], lower_intersections[0]['x'], lower_intersections[0]['y'], upper_intersections[0]['x'], upper_intersections[0]['y'], hazard_beta, capacity['quality_rating'], capacity['performance_rating'], capacity['year'], capacity['stories'])
+    capacity['calcucated_beta'] = get_damage_state_beta(
+        capacity['default_damage_state_beta'],
+        capacity['damage_state_medians']['complete'],
+        lower_intersections[0]['disp'],
+        lower_intersections[0]['acc'],
+        upper_intersections[0]['disp'],
+        upper_intersections[0]['acc'],
+        hazard_beta,
+        capacity['quality_rating'],
+        capacity['performance_rating'],
+        capacity['year'],
+        capacity['stories']
+    )
 
-    damage_probabilities = get_damage_probabilities(capacity['damage_state_medians'], capacity['calcucated_beta'], med_intersections[0]['x'])
+    damage_probabilities = get_damage_probabilities(
+        capacity['damage_state_medians'],
+        capacity['calcucated_beta'],
+        med_intersections[0]['disp']
+    )
 
     return damage_probabilities, capacity, demand, lower_demand, upper_demand, med_intersections, lower_intersections, upper_intersections

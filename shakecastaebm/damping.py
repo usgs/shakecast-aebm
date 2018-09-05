@@ -4,9 +4,9 @@ from .spectrum import build_spectrum, interpolate
 from .data_tables import degradation_factor
 
 def get_b_eff(capacity, kappa):
-    last_b_h = 0;
-    b_eff = [0] * len(capacity['curve'])
-    b_eff[0] = [{'x': 0, 'y': capacity['elastic_damping'] * 100}]
+    last_b_h = 0
+    b_eff_lst = [0] * len(capacity['curve'])
+    b_eff_lst[0] = [{'x': 0, 'y': capacity['elastic_damping'] * 100}]
 
     for i in range(len(capacity['curve'])):
         point = capacity['curve'][i]
@@ -16,33 +16,33 @@ def get_b_eff(capacity, kappa):
         else:
             prev_point = None
 
-        t = 0;
-        if point['y'] > 0:
-            t = math.sqrt(point['x'] /
-                    (9.779738 * point['y']));
+        t = 0
+        if point['acc'] > 0:
+            t = math.sqrt(point['disp'] /
+                    (9.779738 * point['acc']))
 
         if t >= capacity['elastic_period'] and prev_point is not None:
-            b_h = 100 * (kappa * ( 2*(point['y'] + prev_point['y']) *
-                        (point['x']-(prev_point['x'] + (capacity['yield_point']['x']/capacity['yield_point']['y']) *
-                        (point['y']-prev_point['y'])))+(((last_b_h/100)/kappa)) *
-                        2 * math.pi * prev_point['x']*prev_point['y'])/(2*math.pi*point['x']*point['y']))
+            b_h = 100 * (kappa * ( 2*(point['acc'] + prev_point['acc']) *
+                        (point['disp']-(prev_point['disp'] + (capacity['yield_point']['disp']/capacity['yield_point']['acc']) *
+                        (point['acc']-prev_point['acc'])))+(((last_b_h/100)/kappa)) *
+                        2 * math.pi * prev_point['disp']*prev_point['acc'])/(2*math.pi*point['disp']*point['acc']))
 
-            last_b_h = b_h;
+            last_b_h = b_h
           
-            b_eff[i] = {'x': t, 'y': max(b_h, capacity['elastic_damping'] * 100)};
+            b_eff_lst[i] = {'x': t, 'y': max(b_h, capacity['elastic_damping'] * 100)}
         else:
-            b_eff[i] = {'x': t, 'y': (capacity['elastic_damping'] * 100)};
+            b_eff_lst[i] = {'x': t, 'y': (capacity['elastic_damping'] * 100)}
 
-    return b_eff
+    return b_eff_lst
 
 def get_dsf(beta, mag, rRup):
     dsf = []
     for i in range(len(beta)):
         lnDSF = ((sanaz.b0[i]['y'] + sanaz.b1[i]['y']*math.log(beta[i]['y']) + sanaz.b2[i]['y']*((math.log(beta[i]['y']))**2)) +
                         (sanaz.b3[i]['y'] + sanaz.b4[i]['y']*math.log(beta[i]['y']) + sanaz.b5[i]['y']*((math.log(beta[i]['y']))**2)) * mag +
-                        (sanaz.b6[i]['y'] + sanaz.b7[i]['y']*math.log(beta[i]['y']) + sanaz.b8[i]['y']*((math.log(beta[i]['y']))**2)) * math.log(rRup+1));
+                        (sanaz.b6[i]['y'] + sanaz.b7[i]['y']*math.log(beta[i]['y']) + sanaz.b8[i]['y']*((math.log(beta[i]['y']))**2)) * math.log(rRup+1))
         
-        dsf += [{'x': beta[i]['x'], 'y': round(math.exp(lnDSF), 3)}];
+        dsf += [{'x': beta[i]['x'], 'y': round(math.exp(lnDSF), 3)}]
 
     return dsf
 
@@ -50,18 +50,18 @@ def damp(demand, capacity, mag, r_rup):
     kappa = get_kappa(capacity['performance_rating'], capacity['year'], mag, r_rup)
     b_eff_spectrum = get_b_eff(capacity, kappa)
 
-    beta = build_spectrum(b_eff_spectrum, sanaz.t);
+    beta = build_spectrum(b_eff_spectrum, sanaz.t)
     dsf = get_dsf(beta, mag, r_rup)
 
     # expand dsf to match demand spectrum periods
-    dsf = build_spectrum(dsf, [point['x'] for point in demand])
+    dsf = build_spectrum(dsf, [point['period'] for point in demand])
 
     damped_demand = [0] * len(demand)
     for i in range(len(demand)):
-        damp_disp = demand[i]['disp'] * dsf[i]['y'];
-        damp_acc = damp_disp/(9.779738 * demand[i]['x']**2);
+        damp_disp = demand[i]['disp'] * dsf[i]['y']
+        damp_acc = damp_disp/(9.779738 * demand[i]['period']**2)
 
-        damped_demand[i] = {'disp': damp_disp, 'y': damp_acc, 'x': demand[i]['x']};
+        damped_demand[i] = {'disp': damp_disp, 'acc': damp_acc, 'period': demand[i]['period']}
 
     return damped_demand
 

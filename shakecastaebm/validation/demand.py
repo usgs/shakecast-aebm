@@ -26,8 +26,8 @@ def run():
 
     fig2 = plt.figure()
     plt.title('Demand Curve')
-    plt.plot([p['disp'] for p in demand], [p['y'] for p in demand], label='Raw Demand')
-    plt.plot([p['disp'] for p in damped_demand], [p['y'] for p in damped_demand], label='Damped Demand')
+    plt.plot([p['disp'] for p in demand], [p['acc'] for p in demand], label='Raw Demand')
+    plt.plot([p['disp'] for p in damped_demand], [p['acc'] for p in damped_demand], label='Damped Demand')
     plt.xlabel('Spectral Displacement (inches)')
     plt.ylabel('Spectral Acceleration (%g)')
     plt.legend()
