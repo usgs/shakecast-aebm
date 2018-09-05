@@ -494,7 +494,7 @@ def get_capacity_curve(d_y, a_y, d_u, a_u, elastic_points=5, elipse_points=15, u
     incr = (d_u * 10 - d_u) / (ultimate_points / 2)
     d = d_u + incr
     while d < d_u * 10:
-        points += [{'disp': d, 'disp': d, 'acc': a_u}]
+        points += [{'disp': d, 'acc': a_u}]
 
         d += incr
 

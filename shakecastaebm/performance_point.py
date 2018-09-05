@@ -1,5 +1,12 @@
+import math
+
 def performance_point(capacity, demand):
     intersections = find_intersections(capacity, demand, 'disp', 'acc')
+
+    # calculate periods for intersections
+    for intersection in intersections:
+        period = math.sqrt(intersection['disp'] / intersection['acc'] /  9.779738)
+        intersection['period'] = round(period*100) / 100
 
     if len(intersections) == 1:
         return intersections
