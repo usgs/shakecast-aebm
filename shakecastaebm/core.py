@@ -1,7 +1,7 @@
 from . import damping
 from .demand import get_demand
 from .damage import get_damage_state_beta, get_damage_probabilities
-from .performance_point import performance_point
+from .performance_point import get_performance_point
 from .data_tables import pref_periods
 
 def run(capacity, hazard, hazard_beta,
@@ -50,12 +50,28 @@ def run(capacity, hazard, hazard_beta,
 
     '''
     demand, lower_demand, upper_demand = get_demand(hazard, hazard_beta, pref_periods, capacity, mag, r_rup)
-    med_intersections = performance_point(capacity['curve'], demand)
-    lower_intersections = performance_point(capacity['curve'], lower_demand)
-    upper_intersections = performance_point(capacity['curve'], upper_demand)
+    med_intersections = get_performance_point(capacity['curve'], demand)
+    lower_intersections = get_performance_point(capacity['curve'], lower_demand)
+    upper_intersections = get_performance_point(capacity['curve'], upper_demand)
 
-    capacity['calcucated_beta'] = get_damage_state_beta(capacity['default_damage_state_beta'], capacity['damage_state_medians']['complete'], lower_intersections[0]['x'], lower_intersections[0]['y'], upper_intersections[0]['x'], upper_intersections[0]['y'], hazard_beta, capacity['quality_rating'], capacity['performance_rating'], capacity['year'], capacity['stories'])
+    capacity['calcucated_beta'] = get_damage_state_beta(
+        capacity['default_damage_state_beta'],
+        capacity['damage_state_medians']['complete'],
+        lower_intersections[0]['disp'],
+        lower_intersections[0]['acc'],
+        upper_intersections[0]['disp'],
+        upper_intersections[0]['acc'],
+        hazard_beta,
+        capacity['quality_rating'],
+        capacity['performance_rating'],
+        capacity['year'],
+        capacity['stories']
+    )
 
-    damage_probabilities = get_damage_probabilities(capacity['damage_state_medians'], capacity['calcucated_beta'], med_intersections[0]['x'])
+    damage_probabilities = get_damage_probabilities(
+        capacity['damage_state_medians'],
+        capacity['calcucated_beta'],
+        med_intersections[0]['disp']
+    )
 
     return damage_probabilities, capacity, demand, lower_demand, upper_demand, med_intersections, lower_intersections, upper_intersections

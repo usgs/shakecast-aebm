@@ -14,6 +14,7 @@ matplotlib==2.2.2
 numpy==1.15.0
 packaging==17.1
 Pygments==2.2.0
+pylint==1.9.3
 pyparsing==2.2.0
 python-dateutil==2.7.3
 pytz==2018.5

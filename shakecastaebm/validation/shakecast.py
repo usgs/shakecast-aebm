@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 
-from shakecastaebm.performance_point import performance_point
 from shakecastaebm.demand import get_demand, make_demand_spectrum
 from shakecastaebm.spectrum import build_spectrum
 from shakecastaebm.damage import *
@@ -44,8 +43,8 @@ def run():
             hazard, hazard_beta, mag, r_rup)
 
     cap_fig = plt.figure()
-    plt.plot([p['x'] for p in capacity['curve']],
-        [p['y'] for p in capacity['curve']], 'b', label='Capacity Curve')
+    plt.plot([p['disp'] for p in capacity['curve']],
+        [p['acc'] for p in capacity['curve']], 'b', label='Capacity Curve')
     plt.xlabel('Spectral Displacement (inches)')
     plt.ylabel('Spectral Acceleration (%g)')
     plt.title('Capacity Curve')
@@ -68,31 +67,33 @@ def run():
 
     dem_fig = plt.figure()
     plt.title('Demand Curve')
-    plt.plot([p['disp'] for p in undamped_demand], [p['y'] for p in undamped_demand], label='Raw Demand')
-    plt.plot([p['disp'] for p in demand], [p['y'] for p in demand], label='Damped Demand')
+    plt.plot([p['disp'] for p in undamped_demand], [p['acc'] for p in undamped_demand], label='Raw Demand')
+    plt.plot([p['disp'] for p in demand], [p['acc'] for p in demand], label='Damped Demand')
     plt.xlabel('Spectral Displacement (inches)')
     plt.ylabel('Spectral Acceleration (%g)')
-    plt.xlim(0, xmax=demand[-1]['x'] * 2)
+    plt.xlim(0, xmax=demand[-1]['period'] * 2)
     plt.legend()
 
     pp_fig = plt.figure()
     plt.plot([p['disp'] for p in demand],
-        [p['y'] for p in demand], '-r', label='Median Demand')
+        [p['acc'] for p in demand], '-r', label='Median Demand')
     plt.plot([p['disp'] for p in upper_demand],
-        [p['y'] for p in upper_demand], label='Upper bound demand')
+        [p['acc'] for p in upper_demand], label='Upper bound demand')
     plt.plot([p['disp'] for p in lower_demand],
-        [p['y'] for p in lower_demand], label='Lower bound demand')
-    plt.plot([p['x'] for p in capacity['curve']],
-        [p['y'] for p in capacity['curve']], 'b', label='Capacity Curve')
+        [p['acc'] for p in lower_demand], label='Lower bound demand')
+    plt.plot([p['disp'] for p in capacity['curve']],
+        [p['acc'] for p in capacity['curve']], 'b', label='Capacity Curve')
 
 
     intersections = med_intersections + lower_intersections + upper_intersections
     # intersections
-    plt.plot([p['x'] for p in intersections],
-        [p['y'] for p in intersections], 'yo', label='Intersections')
+    plt.plot([p['disp'] for p in intersections],
+        [p['acc'] for p in intersections], 'yo', label='Intersections')
 
-    plt.xlim(0, xmax=demand[-1]['x'] * 2)
-    plt.title('Performance Point Calculation\nDemand: {0:.2f} in, Spectral Acceleration: {0:.2f} %g'.format(med_intersections[0]['x'], med_intersections[0]['y']))
+    plt.xlim(0, xmax=demand[-1]['period'] * 2)
+    plt.title('Performance Point Calculation\nDemand: {0:.2f} in, \
+            Spectral Acceleration: {1:.2f} %g'
+            .format(med_intersections[0]['disp'], med_intersections[0]['acc']))
     plt.xlabel('Spectral Displacement (inches)')
     plt.ylabel('Spectral Acceleration (%g)')
     plt.legend()

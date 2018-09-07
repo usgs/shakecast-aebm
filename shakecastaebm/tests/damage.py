@@ -289,5 +289,55 @@ class TestDamageStates(unittest.TestCase):
         if error:
             raise Exception(error)
 
+
+class TestGetDefaultDamageStateBeta(unittest.TestCase):
+    def setUp(self):
+        self.quality_rating = 'best'
+        self.performance_rating = 'baseline'
+        self.stories = 2
+        self.year = 1980
+
+    def test_allYears(self):
+        year = 1980
+        beta = get_default_damage_state_beta(
+            self.quality_rating,
+            self.performance_rating,
+            year,
+            self.stories
+        )
+
+        self.assertIsNotNone(beta)
+
+        year = 1970
+        beta = get_default_damage_state_beta(
+            self.quality_rating,
+            self.performance_rating,
+            year,
+            self.stories
+        )
+
+        self.assertIsNotNone(beta)
+
+        year = 1950
+        beta = get_default_damage_state_beta(
+            self.quality_rating,
+            self.performance_rating,
+            year,
+            self.stories
+        )
+
+        self.assertIsNotNone(beta)
+
+        year = 1930
+        beta = get_default_damage_state_beta(
+            self.quality_rating,
+            self.performance_rating,
+            year,
+            self.stories
+        )
+
+        self.assertIsNotNone(beta)
+
+
 if __name__ == '__main__':
     unittest.main()
