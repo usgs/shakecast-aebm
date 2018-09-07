@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 
-from shakecastaebm.performance_point import performance_point
 from shakecastaebm.demand import get_demand
 from shakecastaebm.spectrum import build_spectrum
 from shakecastaebm.damage import *
