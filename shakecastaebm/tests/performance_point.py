@@ -21,8 +21,6 @@ class TestGetPerformancePoint(unittest.TestCase):
         self.assertTrue('acc' in pp.keys())
         self.assertTrue('period' in pp.keys())
 
-def main():
-    unittest.main()
 
 if __name__ == '__main__':
-    main()
+    unittest.main()

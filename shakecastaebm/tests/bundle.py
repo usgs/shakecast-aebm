@@ -1,3 +1,4 @@
+from .core import *
 from .damage import *
 from .damping import *
 from .spectrum import *
