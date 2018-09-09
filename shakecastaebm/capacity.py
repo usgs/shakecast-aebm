@@ -432,6 +432,7 @@ def get_ultimate_point(ductility, d_y, a_y, post_yield):
 
 def get_ultimate_period(d, a):
     return math.sqrt(d / (a * 9.779738))
+
 def get_elastic_damping(mbt):
     lookup = {
         'C1': .07,
