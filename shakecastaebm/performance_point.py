@@ -54,8 +54,8 @@ def get_intersection(seg1, seg2, x, y):
                 (dy2 * dx1 - dx2 * dy1))
     
     if (s >= 0 and s <= 1 and t >= 0 and t <= 1):
-        x_val = abs(round(seg1[0][x] + t * dx1 * 1000) / 1000)
-        y_val = abs(round(seg1[0][y] + t * dy1 * 1000) / 1000)
+        x_val = abs(round((seg1[0][x] + t * dx1) * 1000) / 1000)
+        y_val = abs(round((seg1[0][y] + t * dy1) * 1000) / 1000)
         return {x: x_val, y: y_val}
     else:
       return False
