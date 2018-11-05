@@ -4,7 +4,7 @@ from shakecastaebm.demand import get_demand, make_demand_spectrum
 from shakecastaebm.spectrum import build_spectrum
 from shakecastaebm.damage import *
 from shakecastaebm.capacity import get_capacity
-from shakecastaebm.damping import get_kappa, get_b_eff, get_dsf
+from shakecastaebm.damping import get_kappa, get_b_eff, get_dsf, damp
 from shakecastaebm.core import run as run_aebm
 from shakecastaebm.data_tables import pref_periods
 from shakecastaebm.sanaz import t as sanaz_t
@@ -25,6 +25,7 @@ def run():
     capacity = get_capacity('C2', 'high', 1, 24, 2, 1990, 'very_poor', 'poor')
     output = build_spectrum(hazard, pref_periods, insert=[capacity['elastic_period'], capacity['ultimate_period']], finish_val=0)
     undamped_demand = make_demand_spectrum(output)
+    damped_demand = damp(undamped_demand, capacity, mag, r_rup)
 
     kappa = get_kappa(capacity['performance_rating'], capacity['year'], mag, r_rup)
     b_eff = get_b_eff(capacity, kappa)
@@ -68,7 +69,7 @@ def run():
     dem_fig = plt.figure()
     plt.title('Demand Curve')
     plt.plot([p['disp'] for p in undamped_demand], [p['acc'] for p in undamped_demand], label='Raw Demand')
-    plt.plot([p['disp'] for p in demand], [p['acc'] for p in demand], label='Damped Demand')
+    plt.plot([p['disp'] for p in damped_demand], [p['acc'] for p in damped_demand], label='Damped Demand')
     plt.xlabel('Spectral Displacement (inches)')
     plt.ylabel('Spectral Acceleration (%g)')
     plt.xlim(0, xmax=demand[-1]['period'] * 2)
@@ -90,7 +91,7 @@ def run():
     plt.plot([p['disp'] for p in intersections],
         [p['acc'] for p in intersections], 'yo', label='Intersections')
 
-    plt.xlim(0, xmax=demand[-1]['period'] * 2)
+    plt.xlim(0, 20)
     plt.title('Performance Point Calculation\nDemand: {0:.2f} in, \
             Spectral Acceleration: {1:.2f} %g'
             .format(med_intersections[0]['disp'], med_intersections[0]['acc']))
