@@ -25,6 +25,7 @@ def run():
     plt.plot([p['x'] for p in b_eff], [p['y'] for p in b_eff], 'o', label='Calculated Beta')
     plt.xlabel('Period (s)')
     plt.ylabel('Beta Effective')
+    plt.xlim(0, 12)
     plt.legend()
 
     fig2 = plt.figure()

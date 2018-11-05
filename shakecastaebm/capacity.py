@@ -507,6 +507,8 @@ def get_capacity_curve(d_y, a_y, d_u, a_u, elastic_points=5, elipse_points=15, u
 
         d += incr
 
+    # make a final point way in the distance
+    points += [{'disp': 100000, 'acc': points[-1]['acc']}]
     return points
 
 def get_capacity(mbt, sdl, bid, height, stories, year, performance_rating='baseline', quality_rating='poor', elastic_period=None, 

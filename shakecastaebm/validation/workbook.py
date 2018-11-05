@@ -25,7 +25,7 @@ def run():
             hazard, hazard_beta, mag, r_rup)
 
     pp_fig = plt.figure()
-    plt.xlim(xmin=0)
+    plt.xlim(xmin=0, xmax=35)
     plt.plot([p['disp'] for p in demand],
         [p['acc'] for p in demand], '-ro', label='Calculated Demand')
     plt.plot([p['disp'] for p in upper_demand],
@@ -43,7 +43,7 @@ def run():
     plt.plot([p['disp'] for p in intersections],
         [p['acc'] for p in intersections], 'yo', label='Intersections')
 
-    plt.xlim(xmax=demand[-1]['period'] * 2)
+    plt.xlim(0, 20)
     plt.title('Performance Point Workbook Verification')
     plt.xlabel('Spectral Displacement (inches)')
     plt.ylabel('Spectral Acceleration (%g)')
