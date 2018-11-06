@@ -38,7 +38,7 @@ def run():
         [p['y'] for p in demand_check], '-go', label='Demand Verification')
 
 
-    intersections = med_intersections + lower_intersections + upper_intersections
+    intersections = [med_intersections, lower_intersections, upper_intersections]
     # intersections
     plt.plot([p['disp'] for p in intersections],
         [p['acc'] for p in intersections], 'yo', label='Intersections')
