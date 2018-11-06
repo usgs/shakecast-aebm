@@ -1,4 +1,110 @@
 import math
+from .spectrum import linear_interpolate, build_spectrum
+
+def average_intersections(intersections, capacity, demand):
+    first_point = intersections[0]
+    second_point = intersections[1]
+    third_point = intersections[2]
+
+    capacity_seg1 = chop_curve(capacity,
+            first_point['disp'], second_point['disp'], 'disp', 'acc')
+    capacity_seg2 = chop_curve(capacity,
+            second_point['disp'], third_point['disp'], 'disp', 'acc')
+
+    demand_seg1 = chop_curve(demand,
+            first_point['disp'], second_point['disp'], 'disp', 'acc')
+    demand_seg2 = chop_curve(demand,
+            second_point['disp'], third_point['disp'], 'disp', 'acc')
+
+    capacity_area1 = get_area_under_curve(capacity_seg1, 'disp', 'acc')
+    capacity_area2 = get_area_under_curve(capacity_seg2, 'disp', 'acc')
+    demand_area1 = get_area_under_curve(demand_seg1, 'disp', 'acc')
+    demand_area2 = get_area_under_curve(demand_seg2, 'disp', 'acc')
+
+    area_diff1 = abs(capacity_area1 - demand_area1)
+    area_diff2 = abs(capacity_area2 - demand_area2)
+
+    x_difference = third_point['disp'] - first_point['disp']
+
+    if area_diff1 > area_diff2:
+        adjust_percentage = area_diff2 / (area_diff1 + area_diff2)
+        performance_point_disp = first_point['disp'] + (x_difference * adjust_percentage)
+    else:
+        adjust_percentage = area_diff1 / (area_diff1 + area_diff2)
+        performance_point_disp = third_point['disp'] - (x_difference * adjust_percentage)
+
+    performance_point = find_point_on_curve(performance_point_disp,
+            capacity, 'disp', 'acc')
+
+    return performance_point
+
+def chop_curve(curve, start_val, stop_val, x='x', y='y'):
+    idx = 0
+    chopped_curve = []
+    for point in curve:
+        if point[x] == start_val:
+            chopped_curve += [point]
+        elif point[x] > start_val and point[x] < stop_val:
+            if idx > 0 and len(chopped_curve) == 0:
+                # interpolate to get the right value
+                chopped_curve += [
+                    {
+                        'acc': linear_interpolate(start_val, curve[idx - 1], curve[idx], x, y),
+                        'disp': start_val
+                    },
+                    point
+                ]
+            else:
+                chopped_curve += [point]
+        
+        elif point[x] > stop_val:
+            # interpolate final point
+            chopped_curve += [
+                {
+                    'acc': linear_interpolate(stop_val, curve[idx - 1], curve[idx], x, y),
+                    'disp': stop_val
+                }
+            ]
+            return chopped_curve
+
+        idx += 1
+    return chopped_curve
+
+def find_point_on_curve(x_val, curve, x = 'x', y = 'y'):
+    point = {
+        x: x_val,
+        y: None
+    }
+
+    for idx in range(len(curve) - 1):
+        if curve[idx][x] > x_val:
+            if idx > 0:
+                point[y] = linear_interpolate(x_val, curve[idx-1], curve[idx], x, y)
+            else:
+                point[y] = linear_interpolate(x_val, curve[idx], curve[idx + 1], x, y)
+        
+            return point
+
+    return None
+
+def get_area_under_curve(curve, x='x', y='y'):
+    '''
+    Integrates a curve of discrete values
+    '''
+    x_vals = [curve[0][x] + x_int * .001 for x_int in 
+            range(0, int((curve[-1][x] - curve[0][x]) * 1000))]
+    expanded_curve = build_spectrum(curve, x_vals, x='disp', y='acc')
+
+    total_area = 0
+    for idx in range(len(expanded_curve) - 2):
+        p1 = expanded_curve[idx]
+        p2 = expanded_curve[idx + 1]
+
+        area = (p2[x] - p1[x]) * p2[y]
+        total_area += area
+
+    return total_area
+
 
 def get_performance_point(capacity, demand):
     intersections = find_intersections(capacity, demand, 'disp', 'acc')
@@ -9,7 +115,11 @@ def get_performance_point(capacity, demand):
         intersection['period'] = round(period*100) / 100
 
     if len(intersections) == 1:
-        return intersections
+        performance_point = intersections[0]
+    else:
+        performance_point = average_intersections(intersections, capacity, demand)
+    
+    return performance_point
 
     # determine performance point from multiple intersections
   

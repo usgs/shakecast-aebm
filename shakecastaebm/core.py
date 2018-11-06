@@ -57,10 +57,10 @@ def run(capacity, hazard, hazard_beta,
     capacity['calcucated_beta'] = get_damage_state_beta(
         capacity['default_damage_state_beta'],
         capacity['damage_state_medians']['complete'],
-        lower_intersections[0]['disp'],
-        lower_intersections[0]['acc'],
-        upper_intersections[0]['disp'],
-        upper_intersections[0]['acc'],
+        lower_intersections['disp'],
+        lower_intersections['acc'],
+        upper_intersections['disp'],
+        upper_intersections['acc'],
         hazard_beta,
         capacity['quality_rating'],
         capacity['performance_rating'],
@@ -71,7 +71,7 @@ def run(capacity, hazard, hazard_beta,
     damage_probabilities = get_damage_probabilities(
         capacity['damage_state_medians'],
         capacity['calcucated_beta'],
-        med_intersections[0]['disp']
+        med_intersections['disp']
     )
 
     return damage_probabilities, capacity, demand, lower_demand, upper_demand, med_intersections, lower_intersections, upper_intersections
