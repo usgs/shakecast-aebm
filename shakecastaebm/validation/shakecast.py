@@ -86,7 +86,7 @@ def run():
         [p['acc'] for p in capacity['curve']], 'b', label='Capacity Curve')
 
 
-    intersections = med_intersections + lower_intersections + upper_intersections
+    intersections = [med_intersections, lower_intersections, upper_intersections]
     # intersections
     plt.plot([p['disp'] for p in intersections],
         [p['acc'] for p in intersections], 'yo', label='Intersections')
@@ -94,7 +94,7 @@ def run():
     plt.xlim(0, 20)
     plt.title('Performance Point Calculation\nDemand: {0:.2f} in, \
             Spectral Acceleration: {1:.2f} %g'
-            .format(med_intersections[0]['disp'], med_intersections[0]['acc']))
+            .format(med_intersections['disp'], med_intersections['acc']))
     plt.xlabel('Spectral Displacement (inches)')
     plt.ylabel('Spectral Acceleration (%g)')
     plt.legend()
