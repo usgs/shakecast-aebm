@@ -82,6 +82,21 @@ def interpolate(interpX, p1, p2, x='x', y='y'):
     
     return val
 
+def linear_interpolate(interpX, p1, p2, x='x', y='y'):
+    # swap input points if they're in the wrong order
+    if p1[x] > p2[x]:
+      p1, p2 = p2, p1
+
+    x1 = p1[x] if p1[x] != 0 else .000000000001
+    y1 = p1[y] if p1[y] != 0 else .000000000001
+    x2 = p2[x] if p2[x] != 0 else .000000000001
+    y2 = p2[y] if p2[y] != 0 else .000000000001
+
+    val = (y1 * (1 - (interpX - x1) / (x2 - x1)) + 
+            y2 * ((interpX - x1) / (x2 - x1)))
+    
+    return val
+
 def insert_vals(lst, vals):
     lst = sorted(list(set(lst)))
     vals = sorted(list(set(vals)))

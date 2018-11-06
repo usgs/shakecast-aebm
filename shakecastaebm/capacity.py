@@ -523,13 +523,13 @@ def get_capacity(mbt, sdl, bid, height, stories, year, performance_rating='basel
 
     Args:
         mbt: HAZUS model building type
-        sdl: seasmic design level (special, high, moderate, low)
+        sdl: seasmic design level (special_high, high, moderate, low)
         bid: basis ID, 1-7, describes structural deficiencies from FEMA 155
         height: height of the structure in feet
         stories: count of stories above ground.
         year: year the building was constructured or retrofit
         performance_rating: DEFAULT 'baseline', structural performance rating (baseline, poor, or very_poor)
-        quality_rating: DEFAULT 'poor', The quality of this structural data (high, moderate, poor, very_poor) elastic_period=None, 
+        quality_rating: DEFAULT 'poor', The quality of this structural data (best, very_good, good, poor, very_poor) elastic_period=None, 
         elastic_damping=None, design_period=None, ultimate_period=None, design_coefficient=None, modal_weight=None,
         modal_height=None, modal_response=None, pre_yield=None, post_yield=None,
         max_strength=None, ductility=None, default_damage_state_beta=None

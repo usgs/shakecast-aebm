@@ -14,14 +14,12 @@ class TestGetPerformancePoint(unittest.TestCase):
         ]
 
         pp = get_performance_point(capacity, demand)
-        self.assertTrue(isinstance(pp, list))
-
-        pp = pp[0]
+        self.assertTrue(isinstance(pp, dict))
         self.assertTrue('disp' in pp.keys())
         self.assertTrue('acc' in pp.keys())
         self.assertTrue('period' in pp.keys())
 
-    def test_intersection(self):
+    def test_Intersection(self):
         capacity = [
             {'disp': 1, 'acc': .1},
             {'disp': 2, 'acc': 1}
@@ -31,7 +29,7 @@ class TestGetPerformancePoint(unittest.TestCase):
             {'disp': 2, 'acc': .1}
         ]
 
-        pp = get_performance_point(capacity, demand)[0]
+        pp = get_performance_point(capacity, demand)
 
         # slopes for the intersection with the demand
         dem_slope1 = ((demand[0]['acc'] - pp['acc']) /
@@ -48,6 +46,74 @@ class TestGetPerformancePoint(unittest.TestCase):
         self.assertAlmostEqual(dem_slope1, dem_slope2)
         self.assertAlmostEqual(cap_slope1, cap_slope2)
 
+    def test_TripleIntersection(self):
+        capacity = [
+            {'disp': .1, 'acc': 1},
+            {'disp': .5, 'acc': 1},
+            {'disp': 1, 'acc': 1},
+            {'disp': 2, 'acc': 1},
+            {'disp': 3, 'acc': 1},
+            {'disp': 4, 'acc': 1}
+        ]
+
+        demand = [
+            {'disp': .1, 'acc': 2},
+            {'disp': .5, 'acc': .5},
+            {'disp': 2, 'acc': 1.5},
+            {'disp': 3, 'acc': .1}
+        ]
+
+        perf_point = get_performance_point(capacity, demand)
+        intersections = find_intersections(capacity, demand, 'disp', 'acc')
+
+        self.assertTrue(perf_point is not None)
+        self.assertTrue(perf_point['disp'] < intersections[-1]['disp'])
+
+    def test_ChopCurve(self):
+        curve = [
+            {'disp': .1, 'acc': 1},
+            {'disp': .5, 'acc': 1},
+            {'disp': 1, 'acc': 1},
+            {'disp': 2, 'acc': 1},
+            {'disp': 3, 'acc': 1},
+            {'disp': 4, 'acc': 1}
+        ]
+
+        start = .3
+        end = 2.2
+
+        chopped = chop_curve(curve, start, end, 'disp', 'acc')
+
+        self.assertAlmostEqual(start, chopped[0]['disp'])
+        self.assertAlmostEqual(end, chopped[-1]['disp'])
+
+    def test_FindPointOnCurve(self):
+        curve = [
+            {'disp': .1, 'acc': 1},
+            {'disp': .5, 'acc': 1},
+            {'disp': 1, 'acc': 1},
+            {'disp': 2, 'acc': 1},
+            {'disp': 3, 'acc': 1},
+            {'disp': 4, 'acc': 1}
+        ]
+
+        point_disp = 1.7
+        point = find_point_on_curve(point_disp, curve, 'disp', 'acc')
+
+        self.assertAlmostEqual(point_disp, point['disp'])
+        self.assertAlmostEqual(1, point['acc'])
+
+    def test_GetAreaUnderCurve(self):
+        curve = [
+            {'disp': 1, 'acc': 1},
+            {'disp': 2, 'acc': 1},
+            {'disp': 3, 'acc': 1},
+            {'disp': 4, 'acc': 1}
+        ]
+
+        area = get_area_under_curve(curve, 'disp', 'acc')
+
+        self.assertAlmostEqual(area, 3, 2)
 
 if __name__ == '__main__':
     unittest.main()
