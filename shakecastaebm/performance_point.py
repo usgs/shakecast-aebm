@@ -76,7 +76,7 @@ def find_point_on_curve(x_val, curve, x = 'x', y = 'y'):
         y: None
     }
 
-    for idx in range(len(curve) - 1):
+    for idx in range(len(curve)):
         if curve[idx][x] > x_val:
             if idx > 0:
                 point[y] = linear_interpolate(x_val, curve[idx-1], curve[idx], x, y)
@@ -133,7 +133,10 @@ def find_intersections(line1, line2, x='x', y='y'):
         
         intersection = get_intersection(seg1, seg2, x, y)
         if intersection is not False:
-            intersections += [intersection]
+            # make sure this point isn't already in the array
+            x_vals = [p[x] for p in intersections]
+            if intersection[x] not in x_vals:
+                intersections += [intersection]
         
         if seg1[1][x] == seg2[1][x]:
             line1_idx += 1
@@ -146,8 +149,10 @@ def find_intersections(line1, line2, x='x', y='y'):
     return intersections
 
 def get_intersection(seg1, seg2, x, y):
-    # seg1 and seg2 are 2d arrays 
-    # [ {x: x1_val,  y: y1_val}, {x: x2_val, y: y2_val} ]
+    '''
+    seg1 and seg2 are 2d arrays 
+    [ {x: x1_val,  y: y1_val}, {x: x2_val, y: y2_val} ]
+    '''
     dx1 = seg1[1][x] - seg1[0][x]
     dx2 = seg2[1][x] - seg2[0][x]
     dy1 = seg1[1][y] - seg1[0][y]
@@ -169,17 +174,3 @@ def get_intersection(seg1, seg2, x, y):
         return {x: x_val, y: y_val}
     else:
       return False
-
-def weight_intersections(intersections, line1, line2):
-    '''
-    TODO: WRITE THIS FUNCTION
-
-    In the event of multiple intersections, the performance point
-    should be a weighted average of the outer intersections
-    '''
-    #on_top = []
-    #inter_idx = 0
-    #for idx in range(len(line1)):
-    #    if line1[idx]['x'] > intersections[inter_idx]['x']:
-    #        on_top += [line1] if line1[idx]['']
-    return
