@@ -103,6 +103,21 @@ class TestGetPerformancePoint(unittest.TestCase):
         self.assertAlmostEqual(point_disp, point['disp'])
         self.assertAlmostEqual(1, point['acc'])
 
+    def test_FindPointOnCurveLastSegment(self):
+        curve = [
+            {'disp': .1, 'acc': 1},
+            {'disp': .5, 'acc': 1},
+            {'disp': 1, 'acc': 1},
+            {'disp': 2, 'acc': 1},
+            {'disp': 3, 'acc': 1},
+            {'disp': 4, 'acc': 1}
+        ]
+
+        point_disp = 3.8
+        point = find_point_on_curve(point_disp, curve, 'disp', 'acc')
+
+        self.assertAlmostEqual(point_disp, point['disp'])
+
     def test_GetAreaUnderCurve(self):
         curve = [
             {'disp': 1, 'acc': 1},
@@ -115,6 +130,24 @@ class TestGetPerformancePoint(unittest.TestCase):
         EXPECTED_AREA = 3
 
         self.assertAlmostEqual(area, EXPECTED_AREA)
+
+    def test_FindsIntersectionInLastSegment(self):
+        capacity = [
+            {'disp': 1, 'acc': 1},
+            {'disp': 2, 'acc': 1},
+            {'disp': 3, 'acc': 1},
+            {'disp': 4, 'acc': 1}
+        ]
+
+        demand = [
+            {'disp': 1, 'acc': 2},
+            {'disp': 2, 'acc': 2},
+            {'disp': 3, 'acc': 2},
+            {'disp': 4, 'acc': 0}
+        ]
+
+        pp = get_performance_point(capacity, demand)
+        self.assertIsNotNone(pp)
 
 if __name__ == '__main__':
     unittest.main()
