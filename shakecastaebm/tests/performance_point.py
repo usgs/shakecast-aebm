@@ -112,8 +112,9 @@ class TestGetPerformancePoint(unittest.TestCase):
         ]
 
         area = get_area_under_curve(curve, 'disp', 'acc')
+        EXPECTED_AREA = 3
 
-        self.assertAlmostEqual(area, 3, 2)
+        self.assertAlmostEqual(area, EXPECTED_AREA)
 
 if __name__ == '__main__':
     unittest.main()
