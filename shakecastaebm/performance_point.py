@@ -91,12 +91,12 @@ def get_area_under_curve(curve, x='x', y='y'):
     '''
     Integrates a curve of discrete values
     '''
-    x_vals = [curve[0][x] + x_int * .001 for x_int in 
-            range(0, int((curve[-1][x] - curve[0][x]) * 1000))]
-    expanded_curve = build_spectrum(curve, x_vals, x='disp', y='acc')
+    x_vals = [curve[0][x] + x_int * .1 for x_int in range(0, int((curve[-1][x] - curve[0][x]) * 10))]
+    x_vals += [curve[-1][x]]
+    expanded_curve = build_spectrum(curve, x_vals, x=x, y=y)
 
     total_area = 0
-    for idx in range(len(expanded_curve) - 2):
+    for idx in range(len(expanded_curve) - 1):
         p1 = expanded_curve[idx]
         p2 = expanded_curve[idx + 1]
 
