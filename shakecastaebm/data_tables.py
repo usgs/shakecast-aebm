@@ -355,13 +355,13 @@ interstory_drift = {
       'slight': .005,
       'moderate': .01,
       'extensive': .03,
-      'complete': .8
+      'complete': .08
     },
     'C2': {
       'slight': .004,
       'moderate': .01,
       'extensive': .03,
-      'complete': .8
+      'complete': .08
     },
     'C3': {
       'slight': .003,
