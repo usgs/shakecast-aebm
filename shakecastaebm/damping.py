@@ -98,7 +98,15 @@ def get_kappa(spr, year, mag, r_rup):
         lower_mag = 7
         upper_mag = 7.25
 
-    r_rup = int(round(r_rup)) if r_rup < 50 else 50
+    if r_rup <= 15:
+        r_rup = int(round(r_rup))
+    elif r_rup < 50:
+        r_rup = int(round(r_rup / 5) * 5)
+    elif r_rup < 1000:
+        r_rup = 50
+    else:
+        r_rup = 1000
+
     spr = 'non-baseline' if spr != 'baseline' else spr
 
     if mag <= 6.25 or mag >= 7.25:
