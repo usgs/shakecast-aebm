@@ -2,6 +2,14 @@ import math
 from .spectrum import linear_interpolate, build_spectrum
 
 def average_intersections(intersections, capacity, demand):
+    if len(intersections) < 3:
+        if intersections[0]['acc'] == 0:
+            return intersections[1]
+        elif intersections[1]['acc'] == 0:
+            return intersections[0]
+        else:
+            return intersections[1]
+
     first_point = intersections[0]
     second_point = intersections[1]
     third_point = intersections[2]
@@ -111,14 +119,22 @@ def get_performance_point(capacity, demand):
 
     # calculate periods for intersections
     for intersection in intersections:
-        period = math.sqrt(intersection['disp'] / intersection['acc'] /  9.779738)
-        intersection['period'] = round(period*100) / 100
+        if intersection['acc'] != 0:
+            period = math.sqrt(intersection['disp'] / intersection['acc'] /  9.779738)
+            intersection['period'] = round(period*100) / 100
+        else:
+            intersection['period'] = 0
 
     if len(intersections) == 1:
         performance_point = intersections[0]
-    else:
+    elif len(intersections) > 1:
         performance_point = average_intersections(intersections, capacity, demand)
-    
+    else:
+        performance_point = {
+            'disp': 0,
+            'acc': 0
+        }
+
     return performance_point
 
     # determine performance point from multiple intersections
