@@ -530,8 +530,12 @@ def get_capacity(mbt, sdl, bid, height, stories, year, performance_rating='basel
         year: year the building was constructured or retrofit
         performance_rating: DEFAULT 'baseline', structural performance rating (baseline, poor, or very_poor)
         quality_rating: DEFAULT 'poor', The quality of this structural data (best, very_good, good, poor, very_poor) elastic_period=None, 
-        elastic_damping=None, design_period=None, ultimate_period=None, design_coefficient=None, modal_weight=None,
-        modal_height=None, modal_response=None, pre_yield=None, post_yield=None,
+        elastic_damping=None, design_period=None, ultimate_period=None,
+        design_coefficient: Cs, coefficient of strength (base shear),
+        modal_weight=None,
+        modal_height=None, modal_response=None,
+        pre_yield=Gamma value,
+        post_yield=None,
         max_strength=None, ductility=None, default_damage_state_beta=None
     
     Returns:
