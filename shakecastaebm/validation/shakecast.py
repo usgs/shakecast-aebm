@@ -13,7 +13,8 @@ from .data import *
 def run():
     # run shakecast example
     hazard = [
-        {'x': .03, 'y': 1.1377},
+        {'x': .01, 'y': .46},
+        {'x': .3, 'y': 1.1377},
         {'x': 1.0, 'y': .8302},
         {'x': 3.0, 'y': .348}
     ]

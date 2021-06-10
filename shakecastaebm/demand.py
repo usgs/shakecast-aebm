@@ -28,6 +28,7 @@ def make_demand_spectrum(input, x='x', y='y'):
     demand = []
     for point in input:
         disp = point[y] * point[x]**2 * 9.779738
+        disp = disp if disp > 0 else 0
         acc = disp/(9.779738 * (point[x]**2))
         demand += [{
             'period': point[x],

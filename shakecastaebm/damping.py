@@ -47,6 +47,11 @@ def get_dsf(beta, mag, rRup):
     return dsf
 
 def damp(demand, capacity, mag, r_rup):
+
+    '''
+    Histeretic damping spectrum and scale with dsf
+    '''
+
     kappa = get_kappa(capacity['performance_rating'], capacity['year'], mag, r_rup)
     b_eff_spectrum = get_b_eff(capacity, kappa)
 
