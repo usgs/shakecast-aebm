@@ -120,9 +120,15 @@ def get_damage_state_beta(default_beta, default_median, lower_bound_demand_disp,
     upper_bound_demand_acc = .0000000001 if upper_bound_demand_acc == 0 else upper_bound_demand_acc
     lower_bound_demand_disp = .0000000001 if lower_bound_demand_disp == 0 else lower_bound_demand_disp
     upper_bound_demand_disp = .0000000001 if upper_bound_demand_disp == 0 else upper_bound_demand_disp
-    return min(1.1 * default_beta,
+    
+    try:
+        return_beta = min(1.1 * default_beta,
             max(.9 * default_beta,
             math.sqrt(min(max(math.log(min(upper_bound_demand_disp, 1.2 * default_median) / min(lower_bound_demand_disp, 1.2 * default_median))/2, demand_uncertainty / 2), demand_uncertainty * 2)**2) + min(max(math.log(min(upper_bound_demand_acc, 1.2 * default_median) / min(lower_bound_demand_acc, 1.2 * default_median))/2, beta_c / 2), 2 * beta_c)**2 + beta_t**2))
+    except:
+        return_beta = 1
+
+    return return_beta
 
 def get_damage_probabilities(
     damage_state_medians,
