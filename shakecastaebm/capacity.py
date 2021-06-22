@@ -577,10 +577,14 @@ def get_capacity(mbt, sdl, bid, height, stories, year, performance_rating='basel
     post_yield = post_yield if post_yield else get_post_yield(mbt, bid)
     max_strength = max_strength if max_strength else get_max_strength(pre_yield, post_yield, modal_weight, design_coefficient)
     ductility = ductility if ductility else get_ductility(stories)
-    default_damage_state_beta = (
-        default_damage_state_beta if default_damage_state_beta else 
-        get_default_damage_state_beta(quality_rating, performance_rating, year, stories)
-    )
+
+    try:
+        default_damage_state_beta = (
+            default_damage_state_beta if default_damage_state_beta else 
+            get_default_damage_state_beta(quality_rating, performance_rating, year, stories)
+        )
+    except:
+        default_damage_state_beta = 1
 
     yield_point = get_yield_point(design_coefficient, elastic_period, modal_weight, pre_yield)
     ultimate_point = get_ultimate_point(ductility, yield_point['disp'], yield_point['acc'], post_yield)
